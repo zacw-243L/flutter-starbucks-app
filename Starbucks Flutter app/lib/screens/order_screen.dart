@@ -169,7 +169,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 color: Colors.green[800],
                 child: Center(
                   child: Text(
-                    'Total: $unitPrice',
+                    'Total: ${unitPrice.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24.0,
