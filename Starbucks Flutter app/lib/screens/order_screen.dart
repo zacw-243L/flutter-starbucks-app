@@ -12,7 +12,7 @@ class _OrderScreenState extends State<OrderScreen> {
   // Define 4 variables to keep track of unitPrice, qty, stars and redemption
   double unitPrice = 0;
   int qty = 1;
-  double stars = 124;
+  double stars = 60.01;
   double starsholding = 0;
   bool redeem = false;
   List<String> rooms = ['Tall', 'Grande', 'Venti'];
@@ -164,17 +164,21 @@ class _OrderScreenState extends State<OrderScreen> {
                 controlAffinity: ListTileControlAffinity.leading,
                 value: redeem,
                 onChanged: (newValue) {
-                  if (newValue != null) {
+                  if (newValue != null && (stars >= 60 || starsholding == 60)) {
                     setState(() {
                       redeem = newValue;
                       if (redeem) {
                         stars -= 60;
+                        starsholding += 60;
+                        print('starsholding: $starsholding');
                         stars = stars > 0
                             ? stars
                             : 0; // Ensure stars doesn't go below 0
                       } else {
-                        stars +=
-                            60; // Refund the stars when unchecking the checkbox
+                        stars += 60;
+                        starsholding -= 60;
+                        print(
+                            'starsholding: $starsholding'); // Refund the stars when unchecking the checkbox
                       }
                     });
                   }
