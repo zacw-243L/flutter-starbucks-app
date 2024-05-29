@@ -34,37 +34,42 @@ class _OrderScreenState extends State<OrderScreen> {
                 padding: const EdgeInsets.all(10),
                 width: double.infinity,
                 color: Colors.black,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    children: [
-                      //TODO Q5 Widgets to show member status and num of stars
-                      Text(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
                         'MEMBERSHIP STATUS'.toUpperCase(),
                         style: TextStyle(
                           color: Colors.green,
                         ),
                       ),
-                      Text(
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
                         'Green Level',
                         style: TextStyle(
                           color: Colors.green,
                           fontSize: 24.0,
                         ),
                       ),
-                      Text(
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
                         '$stars / 300 stars earned',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24.0,
                         ),
                       ),
-                      LinearProgressIndicator(
-                        value: stars / 300,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                      ),
-                    ],
-                  ),
+                    ),
+                    LinearProgressIndicator(
+                      value: stars / 300,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                    ),
+                  ],
                 ),
               ),
               ListTile(
