@@ -158,7 +158,8 @@ class _OrderScreenState extends State<OrderScreen> {
               ),
               //TODO Q8 CheckboxListTile to indicate whether to redeem reward
               CheckboxListTile(
-                title: const Text('redeem 60 stars to get \$6 off'),
+                title: const Text(
+                    'Rewards Redemption:\n \$6 off a drink with 60 stars'),
                 controlAffinity: ListTileControlAffinity.leading,
                 value: redeem,
                 onChanged: (newValue) {
