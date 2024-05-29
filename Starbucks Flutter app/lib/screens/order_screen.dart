@@ -12,7 +12,8 @@ class _OrderScreenState extends State<OrderScreen> {
   // Define 4 variables to keep track of unitPrice, qty, stars and redemption
   double unitPrice = 0;
   int qty = 1;
-  double stars = 220;
+  double stars = 124;
+  double starsholding = 0;
   bool redeem = false;
   List<String> rooms = ['Tall', 'Grande', 'Venti'];
 
@@ -58,7 +59,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '$stars / 300 stars earned',
+                        '${stars.toStringAsFixed(2)} / 300 stars earned',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24.0,
@@ -163,9 +164,20 @@ class _OrderScreenState extends State<OrderScreen> {
                 controlAffinity: ListTileControlAffinity.leading,
                 value: redeem,
                 onChanged: (newValue) {
-                  setState(() {
-                    redeem = newValue!;
-                  });
+                  if (newValue != null) {
+                    setState(() {
+                      redeem = newValue;
+                      if (redeem) {
+                        stars -= 60;
+                        stars = stars > 0
+                            ? stars
+                            : 0; // Ensure stars doesn't go below 0
+                      } else {
+                        stars +=
+                            60; // Refund the stars when unchecking the checkbox
+                      }
+                    });
+                  }
                 },
               ),
               Container(
@@ -175,14 +187,14 @@ class _OrderScreenState extends State<OrderScreen> {
                 color: Colors.green[800],
                 child: Center(
                   child: Text(
-                    'Total: ${unitPrice.toStringAsFixed(2)}',
+                    'Total: ${(unitPrice * qty - (redeem ? 6 : 0)).clamp(0.00, double.infinity).toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24.0,
                     ),
                   ),
-                ), //TODO Q6 Text to show total price
-              ),
+                ),
+              )
             ],
           ),
         ),
